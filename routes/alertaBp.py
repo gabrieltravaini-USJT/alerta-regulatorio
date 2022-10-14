@@ -14,7 +14,7 @@ alertaBp = Blueprint('alertaBp',__name__)
 
 @alertaBp.route('/teste')
 def testebanco():
-    '''
+ 
     base_alerta.create_all()
     df_data = {'id' : [1,2,3,4,5,6,7,8,9,10], 
                'titulo':["alerta1","alerta2","alerta3","alerta4","alerta5","alerta6","alerta7","alerta8","alerta9","alerta10"],
@@ -29,6 +29,6 @@ def testebanco():
         alerta = Alerta(id = row.id, titulo = row.titulo, resumo = row.resumo, link = row.link, fonte = row.fonte, data = row.data, pldft = row.pldft)
         base_alerta.session.add(alerta)
     base_alerta.session.commit()
-    '''
+ 
     lista = Alerta.query.order_by(desc(Alerta.data)).all()
     return render_template('teste.html',alerta = lista)
