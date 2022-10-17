@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='Styles/filter.css') }}"> 
+    <title>Testebanco</title>
+</head>
+<body>
+    <header>
+    <h1 style="text-align: center;">Banco Teste</h1>
+    </header>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="table">
+                    <thead>
+                        <th>Busca por ID</th>
+                        <th>Filtro por Fonte</th>
+                        <th>Filtro por Data</th>
+                        <th>Filtro PLDFT</th>
+                        <th>  </th>
+                    </thead>
+                        <form method = "POST" action="/filter">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <input type="text" name="buscaID" id="buscaID" value = {{bid}}>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" name = "FonteSUSEP" id = "FonteSUSEP"{{"checked" if borigem0=="True" else"" }}>
+                                        <label for="FonteSUSEP"> SUSEP</label><br>
+                                        <input type="checkbox" name = "FonteANS" id = "FonteANS"{{"checked" if borigem1=="True" else"" }}>
+                                        <label for="FonteANS"> ANS</label><br>
+                                        <input type="checkbox" name = "FonteBACEN" id = "FonteBACEN"{{"checked" if borigem=="True" else "" }}>
+                                        <label for="FonteBACEN"> BACEN</label><br>
+                                    </td>
+                                    <td>
+                                        Data Inicio:
+                                        <input type="date" name="inicio" id="inicio" format="dd/mm/yyyy" value={{dini}}>
+
+                                        Data Fim:
+                                        <input type="date" name="fim" id="fim"  format="dd/mm/yyyy" value={{dfim}}>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" name = "FiltroPLDFT" id = "FiltroPLDFT"{{"checked" if pldft=="True" else"" }}>
+                                        <label for="FiltroPLDFT"> PLDFT</label><br>
+                                    </td>
+                                    <td><input type="submit" value = "filtrar"></td>
+                                </tr>
+                            </tbody>
+                        </form>
+                </table>
+            </div>
+        </div>
+    </div>
+    <br><br><br>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <table class="table">
+                        <thead>
+                            <th>ID</th>
+                            <th>Titulo</th>
+                            <th>Resumo</th>
+                            <th>Link</th>
+                            <th>Fonte</th>
+                            <th>Data</th>
+                            <th>PLDFT</th>
+                        </thead>
+                        <tbody>
+                            {% for alertas in alerta%}
+                            <tr>
+                                <td>{{alertas.id}}</td>
+                                <td>{{alertas.titulo}}</td>
+                                <td>{{alertas.resumo}}</td>
+                                <td>{{alertas.link}}</td>
+                                <td>{{alertas.fonte}}</td>
+                                <td>{{alertas.data}}</td>
+                                <td>{{alertas.pldft}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+</body>
+</html>
